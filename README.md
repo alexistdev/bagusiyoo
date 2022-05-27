@@ -1,4 +1,4 @@
-# bagusiyoo
+# Plant Diary
 Ini adalah aplikasi berbasis Android yang digunakan untuk mencatat aktivitas pertumbuhan tanaman pada Project Tani Cerdas IIB Darmajaya.
 
 Source code file terdiri dari 2 directory yaitu:
