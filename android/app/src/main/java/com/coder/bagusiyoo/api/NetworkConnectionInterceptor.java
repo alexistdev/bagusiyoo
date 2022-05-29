@@ -21,7 +21,6 @@ class NetworkConnectionInterceptor implements Interceptor {
     public Response intercept(@NonNull Interceptor.Chain chain) throws IOException {
         if (!isConnected()) {
             throw new NoConnectivityException();
-            // ini untuk custom exception 'NoConnectivityException'
         }
         Request.Builder builder = chain.request().newBuilder();
         return chain.proceed(builder.build());
