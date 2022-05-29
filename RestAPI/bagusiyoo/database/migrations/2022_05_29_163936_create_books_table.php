@@ -23,6 +23,7 @@ return new class extends Migration
                 ->constrained('tanamans')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->string('name');
             $table->integer('harike');
             $table->date('panen');
             $table->timestamps();

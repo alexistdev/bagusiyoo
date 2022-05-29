@@ -20,6 +20,7 @@ class BookSeeder extends Seeder
         $book = [
             'user_id' => 2,
             'tanaman_id' => 1,
+            'name' => "Tanamanku",
             'harike' => 1,
             'panen' => "2022-06-30",
             'created_at' => $date,

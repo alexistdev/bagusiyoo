@@ -4,16 +4,20 @@ import android.content.Context;
 
 import com.coder.bagusiyoo.BuildConfig;
 import com.coder.bagusiyoo.config.Constants;
+import com.coder.bagusiyoo.response.GetDiary;
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public interface APIService {
-//    @GET("api/Paket/harga")
-//    Call<GetHarga> dapatkanHarga(@Query("id_paket") String id_paket);
+    @GET("api/diary")
+    Call<GetDiary> dapatDiary(@Query("idUser") String id_user);
 
     class Factory{
         public static APIService create(Context mContext){

@@ -21,7 +21,6 @@ class DiaryController extends Controller
             ),404);
         } else {
             $data = Book::where('user_id',$request->idUser)->get();
-
             if(!$data->isEmpty()){
                 return response()->json(array(
                     'status' => true,
