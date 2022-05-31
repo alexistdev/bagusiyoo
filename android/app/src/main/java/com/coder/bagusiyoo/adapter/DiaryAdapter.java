@@ -38,9 +38,9 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
     @Override
     public void onBindViewHolder (@NonNull MyViewHolder holder,final int position){
         holder.mHarike.setText("Hari ke "+mDiaryList.get(position).getHarike());
-        holder.mMulai.setText("Start: "+mDiaryList.get(position).getMulaiTanam());
+        holder.mMulai.setText("Mulai: "+mDiaryList.get(position).getMulaiTanam());
         holder.mTanaman.setText(mDiaryList.get(position).getNamaTanaman());
-        holder.mPanen.setText("Estimasi Panen: "+mDiaryList.get(position).getPanen());
+        holder.mPanen.setText("Selesai: "+mDiaryList.get(position).getPanen());
         holder.itemView.setOnClickListener(view -> {
             Intent mIntent = new Intent(view.getContext(), Detailtanaman.class);
 //            mIntent.putExtra("idMapel",mMapelList.get(position).getId_pelajaran());
