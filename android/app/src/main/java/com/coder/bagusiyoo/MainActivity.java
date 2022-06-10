@@ -4,21 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.coder.bagusiyoo.adapter.DiaryAdapter;
 import com.coder.bagusiyoo.api.APIService;
 import com.coder.bagusiyoo.api.NoConnectivityException;
 import com.coder.bagusiyoo.model.DiaryModel;
 import com.coder.bagusiyoo.response.GetDiary;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private DiaryAdapter diaryAdapter;
     private List<DiaryModel> daftarDiary;
     private ProgressDialog progressDialog;
+    private ImageView mTambah;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         initData();
         setupRecyclerView();
         setData();
+        mTambah.setOnClickListener(v -> {
+            Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
+            startActivity(mIntent);
+        });
     }
 
     private void setData(){
@@ -77,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData(){
+        mTambah = findViewById(R.id.btnTambah);
         progressDialog = ProgressDialog.show(this, "", "Loading.....", true, false);
         gridDiary = findViewById(R.id.rcDiary);
     }

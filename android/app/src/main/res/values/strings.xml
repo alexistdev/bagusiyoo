@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Bagusiyoo</string>
+    <!-- Dashboard -->
+    <string name="dash1">tombol tambah</string>
+    <string name="dash2">Gambar</string>
+    <string name="dash3">Tani Cerdas</string>
+    <string name="dash4">Selamat Datang</string>
+    <string name="dash5">Penjadwalan Budidaya Tanaman Melon</string>
 </resources>

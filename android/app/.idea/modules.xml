@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-452724574/Bagusiyoo.iml" filepath="$PROJECT_DIR$/.idea/modules/-452724574/Bagusiyoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.iml" filepath="$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/Bagusiyoo.app.unitTest.iml" />
+    </modules>
+  </component>
+</project>
