@@ -8,6 +8,7 @@ use App\Models\Tanaman;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\DataTables;
 
 class KategoriTanaman extends Controller
@@ -51,6 +52,7 @@ class KategoriTanaman extends Controller
         ));
     }
 
+
     public function store(Request $request)
     {
         $rules = [
@@ -69,6 +71,39 @@ class KategoriTanaman extends Controller
             $tanaman->save();
             DB::commit();
             return redirect(route('admin.tanaman'))->with(['success' => 'Data tanaman berhasil ditambahkan']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect(route('admin.tanaman'))->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        $rules = [
+            'idTanaman' => 'required|numeric',
+            'nama' => [
+                'required',
+                'max:50',
+                Rule::unique('tanamans','name')->ignore($request->idTanaman),
+            ],
+        ];
+        $message = [
+            'nama.required' => "Nama Tanaman harus diisi !",
+            'nama.max' => "Maksimal karakter adalah 50 karakter !",
+            'nama.unique' => "Nama sudah pernah digunakan sebelumnya !",
+            'idTanaman.required' => "Id Tanaman tidak ditemukan,silahkan refresh halaman !",
+            'idTanaman.numeric' => "Id Tanaman tidak ditemukan,silahkan refresh halaman !",
+
+        ];
+        $request->validateWithBag('edit', $rules,$message);
+        $tanaman = Tanaman::findOrFail($request->idTanaman);
+        DB::beginTransaction();
+        try {
+            $tanaman->update([
+                'name' => $request->nama,
+            ]);
+            DB::commit();
+            return redirect(route('admin.tanaman'))->with(['success' => 'Data tanaman berhasil diperbaharui']);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect(route('admin.tanaman'))->with(['error' => $e->getMessage()]);

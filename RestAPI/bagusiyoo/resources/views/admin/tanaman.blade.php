@@ -102,34 +102,39 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        @csrf
+                <form action="{{route('admin.updatetanaman')}}" method="post">
+                    @csrf
+                    @method('patch')
+                    <div class="modal-body">
                         <div class="form-row">
                             <div class="col-md-12">
-                                <label @if($errors->edit->has('sisa_stok')) class="text-danger" @endif>SISA
-                                    STOK</label>
-                                <input type="number" name="sisa_stok" id="editStock"
-                                       class="form-control @if($errors->edit->has('sisa_stok'))   is-invalid @endif"
-                                       value="{{old('sisa_stok')}}"/>
-                                @if($errors->edit->has('sisa_stok'))
-                                    <span
-                                        class="text-danger errorMessage">{{$errors->edit->first('sisa_stok')}}</span>
+                                <input type="hidden" name="idTanaman" id="editIdTanaman">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="tambahNama"
+                                       @if($errors->edit->has('nama'))  class="text-danger labelForm" @endif>NAMA
+                                    TANAMAN</label>
+                                <input type="text" name="nama" id="editNama" maxlength="50"
+                                       class="form-control @if($errors->edit->has('nama'))   is-invalid @endif inputForm"
+                                       value="{{old('nama')}}"/>
+                                @if($errors->edit->has('nama'))
+                                    <span class="text-danger errorMessage">{{$errors->edit->first('nama')}}</span>
                                 @endif
                             </div>
                         </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -165,6 +170,11 @@
             show: true,
         });
         @endif
+        @if($errors->hasbag('edit'))
+        $('#modalEdit').modal({
+            show: true,
+        });
+        @endif
         $('.modal').on('hidden.bs.modal', function () {
             $('.labelForm').removeClass('text-danger');
             $('.inputForm').removeClass('is-invalid');
@@ -186,9 +196,16 @@
             });
         @endif
 
+        /** Saat tombol modal edit di click */
+        $(document).on("click", ".open-editTanaman", function () {
+            let fid = $(this).data('id');
+            let fname = $(this).data('nama');
+            $('#editIdTanaman').val(fid);
+            $('#editNama').val(fname);
+        })
 
         $('#tableTanaman').dataTable({
-            pageLength: 100,
+            pageLength: 10,
             responsive: true,
             processing: true,
             serverSide: true,
