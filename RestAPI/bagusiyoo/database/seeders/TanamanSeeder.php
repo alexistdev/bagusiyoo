@@ -18,8 +18,8 @@ class TanamanSeeder extends Seeder
     {
         $date = Carbon::now()->format('Y-m-d H:i:s');
         $tanaman = [
-            array('name' => 'Tomat','created_at' => $date,'updated_at' => $date),
-            array('name' => 'Melon','created_at' => $date,'updated_at' => $date),
+            array('name' => 'tomat','created_at' => $date,'updated_at' => $date),
+            array('name' => 'melon','created_at' => $date,'updated_at' => $date),
         ];
         Tanaman::insert($tanaman);
     }

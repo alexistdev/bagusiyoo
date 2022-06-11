@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\{DashboardController as DashAdm};
+use App\Http\Controllers\Admin\{DashboardController as DashAdm,KategoriTanaman as TanAdmin};
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +13,8 @@ Route::get('/dashboard', function () {
 Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
     Route::group(['roles' => 'admin'], function () {
         Route::get('/admin/dashboard', [DashAdm::class, 'index'])->name('admin.dashboard');
+        Route::get('/admin/tanaman', [TanAdmin::class, 'index'])->name('admin.tanaman');
+        Route::post('/admin/tanaman', [TanAdmin::class, 'store'])->name('admin.savetanaman');
     });
 });
 
