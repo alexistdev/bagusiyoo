@@ -37,7 +37,7 @@ class KategoriTanaman extends Controller
                     data-id="' . $row->id . '"
                     data-nama="' . $row->name . '"
                     data-target="#modalEdit"><i class="fas fa-edit"></i> Edit</a>';
-                    $btn2 = $btn.'<a href="" class="btn btn-danger btn-sm m-1 open-hapusProduk" data-id="'.$row->id.'" data-nama="'.$row->name.'" data-toggle="modal" data-target="#modalHapus"><i class="fas fa-trash"></i> Hapus</a>';
+                    $btn2 = $btn.'<a href="" class="btn btn-danger btn-sm m-1 open-hapusTanaman" data-id="'.$row->id.'" data-nama="'.$row->name.'" data-toggle="modal" data-target="#modalHapus"><i class="fas fa-trash"></i> Hapus</a>';
                     return $btn2;
                 })
                 ->rawColumns(['action'])
@@ -104,6 +104,28 @@ class KategoriTanaman extends Controller
             ]);
             DB::commit();
             return redirect(route('admin.tanaman'))->with(['success' => 'Data tanaman berhasil diperbaharui']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect(route('admin.tanaman'))->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $rules = [
+            'idTanaman' => 'required|numeric',
+        ];
+        $message = [
+            'idTanaman.required' => "Id Tanaman tidak ditemukan,silahkan refresh halaman !",
+            'idTanaman.numeric' => "Id Tanaman tidak ditemukan,silahkan refresh halaman !",
+        ];
+        $request->validateWithBag('hapus', $rules,$message);
+        $tanaman = Tanaman::findOrFail($request->idTanaman);
+        DB::beginTransaction();
+        try {
+            $tanaman->delete();
+            DB::commit();
+            return redirect(route('admin.tanaman'))->with(['success' => 'Data tanaman berhasil dihapus']);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect(route('admin.tanaman'))->with(['error' => $e->getMessage()]);

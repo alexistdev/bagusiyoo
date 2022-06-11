@@ -141,23 +141,39 @@
     <!-- End : Modal Edit -->
 
     <!-- Start : Modal Hapus -->
-    <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modalHapus" tabindex="-1" role="dialog"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                <form action="{{route('admin.deletetanaman')}}" method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Hapus</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if($errors->hapus->has('idTanaman'))
+                                    <span class="text-danger errorMessage">{{$errors->hapus->first('idTanaman')}}</span>
+                                @endif
+                                <input type="hidden" name="idTanaman" id="delIdTanaman">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                Apakah ingin menghapus data tanaman <span id="namaTanaman" class="text-danger font-weight-bold"></span> ini?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -172,6 +188,11 @@
         @endif
         @if($errors->hasbag('edit'))
         $('#modalEdit').modal({
+            show: true,
+        });
+        @endif
+        @if($errors->hasbag('hapus'))
+        $('#modalHapus').modal({
             show: true,
         });
         @endif
@@ -202,7 +223,15 @@
             let fname = $(this).data('nama');
             $('#editIdTanaman').val(fid);
             $('#editNama').val(fname);
-        })
+        });
+
+        /** Saat tombol modal hapus di click */
+        $(document).on("click", ".open-hapusTanaman", function () {
+            let fid = $(this).data('id');
+            let fname = $(this).data('nama');
+            $('#delIdTanaman').val(fid);
+            $('#namaTanaman').html(fname);
+        });
 
         $('#tableTanaman').dataTable({
             pageLength: 10,

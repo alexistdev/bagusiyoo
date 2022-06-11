@@ -16,6 +16,7 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
         Route::get('/admin/tanaman', [TanAdmin::class, 'index'])->name('admin.tanaman');
         Route::post('/admin/tanaman', [TanAdmin::class, 'store'])->name('admin.savetanaman');
         Route::patch('/admin/tanaman', [TanAdmin::class, 'update'])->name('admin.updatetanaman');
+        Route::delete('/admin/tanaman', [TanAdmin::class, 'destroy'])->name('admin.deletetanaman');
     });
 });
 
