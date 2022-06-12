@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.coder.bagusiyoo.R;
 import com.coder.bagusiyoo.model.AktivitasModel;
-import com.coder.bagusiyoo.model.DiaryModel;
+
 
 import java.util.List;
 

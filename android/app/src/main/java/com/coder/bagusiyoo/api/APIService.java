@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.coder.bagusiyoo.BuildConfig;
 import com.coder.bagusiyoo.config.Constants;
+import com.coder.bagusiyoo.model.DiaryModel;
 import com.coder.bagusiyoo.response.GetAktivitas;
 import com.coder.bagusiyoo.response.GetDiary;
 
@@ -13,7 +14,10 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIService {
@@ -22,6 +26,14 @@ public interface APIService {
 
     @GET("api/aktivitas")
     Call<GetAktivitas> dapatAktivitas(@Query("idTanaman") String id_tanaman);
+
+    @FormUrlEncoded
+    @POST("api/diary")
+    Call<DiaryModel> tambahData(
+                                @Field("idTanaman") String id_tanaman,
+                                @Field("judul") String judul,
+                                @Field("id_user") String id_user);
+
 
     class Factory{
         public static APIService create(Context mContext){

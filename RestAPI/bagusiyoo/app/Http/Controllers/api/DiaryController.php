@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Aktivitas;
 use App\Models\Book;
+use App\Models\Tanaman;
 use App\Models\Waktutanam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +59,34 @@ class DiaryController extends Controller
                 'status' => true,
                 'message' => 'Data aktivitas berhasil didapatkan',
                 'result' => $aktivitas,
+            ),200);
+        }
+    }
+
+    public function tambah_diary(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'idTanaman' => 'required|numeric',
+            'judul' => 'required|max:255',
+            'id_user' => 'required|numeric',
+        ]);
+        if($validation->fails()){
+            return response()->json(array(
+                'status' => false,
+                'message' => 'Data, tidak lengkap',
+            ),404);
+        } else {
+            $diary = new Book();
+            $panen = Waktutanam::where('tanaman_id',$request->idTanaman)->max('tanggal');
+            $diary->user_id = $request->id_user;
+            $diary->tanaman_id = $request->idTanaman;
+            $diary->name = $request->judul;
+            $diary->harike = 1;
+            $diary->panen = $panen;
+            $diary->save();
+            return response()->json(array(
+                'status' => true,
+                'message' => 'Data aktivitas berhasil disimpan',
             ),200);
         }
     }

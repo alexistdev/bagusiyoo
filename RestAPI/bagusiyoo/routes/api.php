@@ -20,3 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::get('/diary', [Diary::class, 'get_diary']);
 Route::get('/aktivitas', [Diary::class, 'get_aktivitas']);
+Route::post('/diary', [Diary::class, 'tambah_diary']);
