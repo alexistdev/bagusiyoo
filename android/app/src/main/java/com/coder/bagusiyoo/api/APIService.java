@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.coder.bagusiyoo.BuildConfig;
 import com.coder.bagusiyoo.config.Constants;
+import com.coder.bagusiyoo.response.GetAktivitas;
 import com.coder.bagusiyoo.response.GetDiary;
 
 import java.util.concurrent.TimeUnit;
@@ -18,6 +19,9 @@ import retrofit2.http.Query;
 public interface APIService {
     @GET("api/diary")
     Call<GetDiary> dapatDiary(@Query("idUser") String id_user);
+
+    @GET("api/aktivitas")
+    Call<GetAktivitas> dapatAktivitas(@Query("idTanaman") String id_tanaman);
 
     class Factory{
         public static APIService create(Context mContext){

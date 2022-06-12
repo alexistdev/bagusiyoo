@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Aktivitas;
 use App\Models\Produk;
+use App\Models\Rpo;
 use App\Models\Tanaman;
+use App\Models\Waktutanam;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -36,16 +40,17 @@ class KategoriTanaman extends Controller
                     data-toggle="modal"
                     data-id="' . $row->id . '"
                     data-nama="' . $row->name . '"
-                    data-target="#modalEdit"><i class="fas fa-edit"></i> Edit</a>';
-                    $btn2 = $btn.'<a href="" class="btn btn-danger btn-sm m-1 open-hapusTanaman" data-id="'.$row->id.'" data-nama="'.$row->name.'" data-toggle="modal" data-target="#modalHapus"><i class="fas fa-trash"></i> Hapus</a>';
-                    return $btn2;
+                    data-target="#modalEdit" ><i class="fas fa-edit"></i> Edit</a>';
+                    $btn2 = $btn.'<a href="'.route('admin.detailtanaman',$row->id).'" class="btn btn-primary btn-sm m-1"><i class="fas fa-list"></i> Data</a>';
+                    $btn3 = $btn2.'<a href="" class="btn btn-danger btn-sm m-1 open-hapusTanaman" data-id="'.$row->id.'" data-nama="'.$row->name.'" data-toggle="modal" data-target="#modalHapus"><i class="fas fa-trash"></i> Hapus</a>';
+                    return $btn3;
                 })
                 ->rawColumns(['action'])
                 ->make(true);
         }
 
         return view('admin.tanaman',array(
-            'judul' => "Dashboard Administrator | SIBEL V.2.0",
+            'judul' => "Dashboard Administrator | Diary 1.0",
             'aktifTag' => "admin",
             'tagSubMenu' => "admin",
             'user' => "administrator",
@@ -57,11 +62,14 @@ class KategoriTanaman extends Controller
     {
         $rules = [
             'nama' => 'required|max:50|unique:tanamans,name',
+            'waktuTanam' => 'required|numeric',
         ];
         $message = [
             'nama.required' => "Nama Tanaman harus diisi !",
             'nama.max' => "Maksimal karakter adalah 50 karakter !",
             'nama.unique' => "Nama sudah pernah digunakan sebelumnya !",
+            'waktuTanam.required' => "Waktu Tanam harus diisi !",
+            'waktuTanam.numeric' => "Waktu Tanam harus berupa angka!",
         ];
         $request->validateWithBag('tambah', $rules,$message);
         DB::beginTransaction();
@@ -69,6 +77,21 @@ class KategoriTanaman extends Controller
             $tanaman = new Tanaman();
             $tanaman->name = $request->nama;
             $tanaman->save();
+            $idTanaman = $tanaman->id;
+            $dataWaktu = [];
+            $mulai = date('Y-m-d');
+            for($i=1; $i <= $request->waktuTanam;$i++){
+                $xTanggal = strtotime( "+".$i." day", strtotime($mulai));
+                $tanggal = date("Y-m-d", $xTanggal);
+                $dataWaktu[] = [
+                    'tanaman_id' => $idTanaman,
+                    'hari_ke' => $i,
+                    'tanggal' => $tanggal,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                ];
+            }
+            Waktutanam::insert($dataWaktu);
             DB::commit();
             return redirect(route('admin.tanaman'))->with(['success' => 'Data tanaman berhasil ditambahkan']);
         } catch (\Exception $e) {
@@ -129,6 +152,37 @@ class KategoriTanaman extends Controller
         } catch (\Exception $e) {
             DB::rollback();
             return redirect(route('admin.tanaman'))->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function detail($id)
+    {
+        Tanaman::findOrFail($id);
+       $waktuTanam = Waktutanam::with('aktif')->where('tanaman_id',$id)->get();
+
+        return view('admin.detailtanaman', array(
+            'judul' => "Dashboard Administrator | Diary 1.0",
+            'aktifTag' => "admin",
+            'tagSubMenu' => "admin",
+            'user' => "administrator",
+            'waktuTanam' => $waktuTanam,
+        ));
+    }
+
+    public function data_aktivitas(Request $request)
+    {
+        if ($request->ajax()) {
+            $aktivitas = Aktivitas::where('waktutanam_id',$request->idTanam)->get();
+            return DataTables::of($aktivitas)
+                ->addIndexColumn()
+
+                ->addColumn('action', function ($row) {
+                    $btn = '<button data-id="' . $row->id . '" class="btn btn-sm btn-primary m-1 open-DetailPO" data-toggle="modal" data-target="#modalDetail" ><i class="fas fa-edit"></i></button>';
+//                    $btn = $btn . '<button onclick="removeFunction(' . $row->id . ')"  class="btn btn-sm btn-danger m-1" ><i class="fas fa-minus-circle"></i></button>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
     }
 }

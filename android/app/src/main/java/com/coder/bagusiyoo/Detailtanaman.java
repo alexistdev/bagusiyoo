@@ -2,10 +2,34 @@ package com.coder.bagusiyoo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.coder.bagusiyoo.adapter.AktivitasAdapter;
+import com.coder.bagusiyoo.adapter.DiaryAdapter;
+import com.coder.bagusiyoo.api.APIService;
+import com.coder.bagusiyoo.api.NoConnectivityException;
+import com.coder.bagusiyoo.model.AktivitasModel;
+import com.coder.bagusiyoo.response.GetAktivitas;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class Detailtanaman extends AppCompatActivity {
+    private RecyclerView gridAktivitas;
+    private AktivitasAdapter aktivitasAdapter;
+    private List<AktivitasModel> daftarAktivitas;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,5 +42,62 @@ public class Detailtanaman extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        initData();
+        setupRecyclerView();
+        setData();
+    }
+
+    private void setData(){
+        try{
+            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext()).dapatAktivitas("7");
+            call.enqueue(new Callback<GetAktivitas>() {
+                @EverythingIsNonNull
+                @Override
+                public void onResponse(Call<GetAktivitas> call, Response<GetAktivitas> response) {
+                    progressDialog.dismiss();
+                    if(response.isSuccessful()){
+                        if(response.body() != null){
+                            daftarAktivitas = response.body().getListAktivitas();
+                            aktivitasAdapter.replaceData(daftarAktivitas);
+                        }
+                    }
+                }
+                @EverythingIsNonNull
+                @Override
+                public void onFailure(Call<GetAktivitas> call, Throwable t) {
+                    progressDialog.dismiss();
+                    if(t instanceof NoConnectivityException) {
+                        pesan("Internet Offline!");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
+            pesan(e.getMessage());
+        }
+    }
+
+    public void pesan(String msg)
+    {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    private void setupRecyclerView() {
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext()){
+            @Override
+            public RecyclerView.LayoutParams generateDefaultLayoutParams() {
+                return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            }
+        };
+
+        aktivitasAdapter = new AktivitasAdapter(new ArrayList<>());
+        gridAktivitas.setLayoutManager(linearLayoutManager);
+        gridAktivitas.setAdapter(aktivitasAdapter);
+    }
+
+    private void initData(){
+        progressDialog = ProgressDialog.show(this, "", "Loading.....", true, false);
+        gridAktivitas = findViewById(R.id.rcAktivitas);
     }
 }

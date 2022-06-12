@@ -83,6 +83,19 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <label for="waktuTanam"
+                                       @if($errors->tambah->has('waktuTanam'))  class="text-danger labelForm" @endif>WAKTU
+                                    TANAM</label>
+                                <input type="number" name="waktuTanam" id="waktuTanam"
+                                       class="form-control @if($errors->tambah->has('waktuTanam'))   is-invalid @endif inputForm"
+                                       value="{{old('waktuTanam')}}"/>
+                                @if($errors->tambah->has('waktuTanam'))
+                                    <span class="text-danger errorMessage">{{$errors->tambah->first('waktuTanam')}}</span>
+                                @endif
+                            </div>
+                        </div>
 
 
                     </div>
