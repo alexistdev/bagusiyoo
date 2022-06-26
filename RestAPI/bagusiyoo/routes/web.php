@@ -19,6 +19,8 @@ Route::group(['middleware' => ['web', 'auth', 'roles']], function () {
         Route::delete('/admin/tanaman', [TanAdmin::class, 'destroy'])->name('admin.deletetanaman');
 
         Route::get('/admin/{id}/tanaman', [TanAdmin::class, 'detail'])->name('admin.detailtanaman');
+        Route::post('/admin/{hari}/aktivitas', [TanAdmin::class, 'simpan_aktivitas'])->name('admin.tambahaktivitas');
+
 
         Route::get('/admin/ajax/aktivitas', [TanAdmin::class, 'data_aktivitas'])->name('admin.aktivitastanaman');
     });

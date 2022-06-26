@@ -50,8 +50,8 @@
                                         </td>
                                         <td>{{$row->tanggal}}</td>
                                         <td>
-                                            <button class="btn btn-success btn-sm modal-detail-edit" data-id="{{$row->id}}" data-toggle="modal" data-target="#modalDetail">Edit</button>
-                                            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modalTambah">Tambah</button>
+                                            <button class="btn btn-success btn-sm modal-detail-edit" data-id="{{$row->id}}" data-idtanaman="{{$idTanaman}}" data-toggle="modal" data-target="#modalDetail">Edit</button>
+                                            <button class="btn btn-primary btn-sm modal-detail-tambah" data-id="{{$row->id}}" data-idtanaman="{{$idTanaman}}" data-toggle="modal" data-target="#modalTambah">Tambah</button>
 
                                         </td>
                                     </tr>
@@ -109,25 +109,26 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Tambah Data Aktivitas </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('admin.savetanaman')}}" method="post">
+                <form id="tambahForm" action="" method="post">
                     @csrf
                     <div class="modal-body">
 
                         <div class="form-row">
                             <div class="col-md-12">
+                                <input type="hidden" name="idtanaman" id="idtanaman">
                                 <label for="tambahNama"
-                                       @if($errors->tambah->has('nama'))  class="text-danger labelForm" @endif>NAMA
-                                    TANAMAN</label>
+                                       @if($errors->tambahAktivitas->has('nama'))  class="text-danger labelForm" @endif>NAMA
+                                    AKTIVTAS</label>
                                 <input type="text" name="nama" id="tambahNama" maxlength="50"
-                                       class="form-control @if($errors->tambah->has('nama'))   is-invalid @endif inputForm"
+                                       class="form-control @if($errors->tambahAktivitas->has('nama'))   is-invalid @endif inputForm"
                                        value="{{old('nama')}}"/>
-                                @if($errors->tambah->has('nama'))
-                                    <span class="text-danger errorMessage">{{$errors->tambah->first('nama')}}</span>
+                                @if($errors->tambahAktivitas->has('nama'))
+                                    <span class="text-danger errorMessage">{{$errors->tambahAktivitas->first('nama')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -143,6 +144,12 @@
 
     <x-back.js-layout/>
     <script>
+        @if($errors->hasbag('tambahAktivitas'))
+            $('#modalTambah').modal({
+                show: true
+            });
+        @endif
+
         $('#tableWaktu').dataTable({
             responsive: true,
             columns:[
@@ -152,6 +159,16 @@
                 {'width': '20%','class': 'text-center'},
             ]
         });
+        $(document).on("click", ".modal-detail-tambah", function (e) {
+            e.preventDefault();
+            let fid = $(this).data('id');
+            let fidtanaman = $(this).data('idtanaman');
+            let base_url = "{{route('admin.tambahaktivitas',":id")}}";
+            let replaceURL = base_url.replace(":id",fid);
+            $('#tambahForm').attr('action', replaceURL);
+            $('#idtanaman').val(fidtanaman);
+        });
+
         $(document).on("click", ".modal-detail-edit", function () {
             let fid = $(this).data('id');
             let base_url = "{{route('admin.aktivitastanaman')}}";

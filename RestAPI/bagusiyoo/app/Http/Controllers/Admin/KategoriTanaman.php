@@ -166,6 +166,7 @@ class KategoriTanaman extends Controller
             'tagSubMenu' => "admin",
             'user' => "administrator",
             'waktuTanam' => $waktuTanam,
+            'idTanaman' => $id,
         ));
     }
 
@@ -184,5 +185,33 @@ class KategoriTanaman extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
+    }
+
+    public function simpan_aktivitas(Request $request,$hari)
+    {
+       Waktutanam::findOrFail($hari);
+        $rules = [
+            'nama' => 'required|max:255',
+            'idtanaman' => 'required|numeric',
+        ];
+        $message = [
+            'nama.required' => "Nama aktivitas harus diisi !",
+            'nama.max' => "Panjang karakter nama aktivitas maksimal adalah 255 karakter !",
+        ];
+        $request->validateWithBag('tambahAktivitas', $rules,$message);
+        DB::beginTransaction();
+        try{
+            $aktivitas = new Aktivitas();
+            $aktivitas->waktutanam_id = $hari;
+            $aktivitas->name = $request->nama;
+            $aktivitas->save();
+            DB::commit();
+            return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['success' => 'Data aktivitas berhasil ditambahkan']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['error' => $e->getMessage()]);
+        }
+
+
     }
 }
