@@ -105,6 +105,7 @@
             </div>
         </div>
     </div>
+    <!-- Start: Modal Tambah Aktivitas -->
     <div class="modal fade" id="modalTambah" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -141,6 +142,47 @@
             </div>
         </div>
     </div>
+    <!-- End: Modal Tambah Aktivitas -->
+
+    <!-- Start: Modal Tambah Aktivitas -->
+    <div class="modal fade" id="modalEditAktivitas" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Aktivitas </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="editForm" action="" method="post">
+                    @csrf
+                    @method('patch')
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <input type="hidden" name="idtanaman" id="idEditTanaman">
+                                <input type="hidden" name="idaktivitas" id="idEditAktivitas">
+                                <label for="editNama"
+                                       @if($errors->editAktivitas->has('nama'))  class="text-danger labelForm" @endif>NAMA
+                                    AKTIVTAS</label>
+                                <input type="text" name="nama" id="editNama" maxlength="50"
+                                       class="form-control @if($errors->editAktivitas->has('nama'))   is-invalid @endif inputForm"
+                                       value="{{old('nama')}}" required/>
+                                @if($errors->editAktivitas->has('nama'))
+                                    <span class="text-danger errorMessage">{{$errors->editAktivitas->first('nama')}}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End: Modal Tambah Aktivitas -->
 
     <x-back.js-layout/>
     <script>
@@ -148,6 +190,25 @@
             $('#modalTambah').modal({
                 show: true
             });
+        @endif
+        @if($errors->hasbag('editAktivitas'))
+        $('#modalEditAktivitas').modal({
+            show: true
+        });
+        @endif
+        @if ($message = Session::get('success'))
+        $(document).Toasts('create', {
+            class: 'bg-success',
+            title: 'Berhasil',
+            body: '{{ $message }}.'
+        });
+        @endif
+        @if ($message = Session::get('error'))
+        $(document).Toasts('create', {
+            class: 'bg-danger',
+            title: 'Gagal',
+            body: '{{ $message }}'
+        });
         @endif
 
         $('#tableWaktu').dataTable({
@@ -159,6 +220,21 @@
                 {'width': '20%','class': 'text-center'},
             ]
         });
+        $(document).on("click", ".open-editAktivitas", function (e) {
+            e.preventDefault();
+            let fid = $(this).data('id');
+            let fnama = $(this).data('nama');
+            let fhari = $(this).data('hari');
+            let ftanaman = $(this).data('tanaman');
+            $('#editNama').val(fnama);
+            let base_url = "{{route('admin.editaktivitas',":id")}}";
+            let replaceURL = base_url.replace(":id",fhari);
+            $('#editForm').attr('action', replaceURL);
+            $('#idEditTanaman').val(ftanaman);
+            $('#idEditAktivitas').val(fid);
+
+        });
+
         $(document).on("click", ".modal-detail-tambah", function (e) {
             e.preventDefault();
             let fid = $(this).data('id');

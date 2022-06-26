@@ -12,5 +12,10 @@ class Aktivitas extends Model
         'waktutanam_id', 'name'
     ];
 
+    public function waktutanam()
+    {
+        return $this->belongsTo(Waktutanam::class);
+    }
+
 
 }

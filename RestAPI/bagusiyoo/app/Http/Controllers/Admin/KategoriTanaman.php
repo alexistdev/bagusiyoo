@@ -173,12 +173,12 @@ class KategoriTanaman extends Controller
     public function data_aktivitas(Request $request)
     {
         if ($request->ajax()) {
-            $aktivitas = Aktivitas::where('waktutanam_id',$request->idTanam)->get();
+            $aktivitas = Aktivitas::with('waktutanam')->where('waktutanam_id',$request->idTanam)->get();
             return DataTables::of($aktivitas)
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
-                    $btn = '<button data-id="' . $row->id . '" class="btn btn-sm btn-primary m-1 open-DetailPO" data-toggle="modal" data-target="#modalDetail" ><i class="fas fa-edit"></i></button>';
+                    $btn = '<button data-id="' . $row->id . '" class="btn btn-sm btn-primary m-1 open-editAktivitas"  data-tanaman="'.$row->waktutanam->tanaman_id.'"data-hari="'.$row->waktutanam_id.'" data-nama="'.$row->name.'"data-toggle="modal" data-target="#modalEditAktivitas" ><i class="fas fa-edit"></i> Edit</button>';
 //                    $btn = $btn . '<button onclick="removeFunction(' . $row->id . ')"  class="btn btn-sm btn-danger m-1" ><i class="fas fa-minus-circle"></i></button>';
                     return $btn;
                 })
@@ -211,7 +211,31 @@ class KategoriTanaman extends Controller
             DB::rollback();
             return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['error' => $e->getMessage()]);
         }
+    }
 
-
+    public function edit_aktivitas(Request $request, $hari)
+    {
+        Waktutanam::findOrFail($hari);
+        $rules = [
+            'nama' => 'required|max:255',
+            'idtanaman' => 'required|numeric',
+            'idaktivitas' => 'required|numeric',
+        ];
+        $message = [
+            'nama.required' => "Nama aktivitas harus diisi !",
+            'nama.max' => "Panjang karakter nama aktivitas maksimal adalah 255 karakter !",
+        ];
+        $request->validateWithBag('editAktivitas', $rules,$message);
+        DB::beginTransaction();
+        try{
+            Aktivitas::where('id', $request->idaktivitas)->update([
+                'name' => $request->nama,
+            ]);
+            DB::commit();
+            return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['success' => 'Data aktivitas berhasil diperbaharui']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['error' => $e->getMessage()]);
+        }
     }
 }
