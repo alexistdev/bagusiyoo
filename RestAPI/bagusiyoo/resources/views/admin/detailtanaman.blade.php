@@ -144,7 +144,7 @@
     </div>
     <!-- End: Modal Tambah Aktivitas -->
 
-    <!-- Start: Modal Tambah Aktivitas -->
+    <!-- Start: Modal Edit Aktivitas -->
     <div class="modal fade" id="modalEditAktivitas" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -182,7 +182,39 @@
             </div>
         </div>
     </div>
-    <!-- End: Modal Tambah Aktivitas -->
+    <!-- End: Modal Edit Aktivitas -->
+
+    <!-- Start: Modal Hapus Aktivitas -->
+    <div class="modal fade" id="modalHapusAktivitas" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Aktivitas </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="hapusForm" action="" method="post">
+                    @csrf
+                    @method('delete')
+                    <div class="modal-body">
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <input type="hidden" name="idtanaman" id="idHapusTanaman">
+                                <input type="hidden" name="idaktivitas" id="idHapusAktivitas">
+                                Apakah anda mau menghapus data aktivitas ini?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Hapus</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- End: Modal Hapus Aktivitas -->
 
     <x-back.js-layout/>
     <script>
@@ -210,6 +242,13 @@
             body: '{{ $message }}'
         });
         @endif
+        @if ($message = Session::get('hapus'))
+        $(document).Toasts('create', {
+            class: 'bg-danger',
+            title: 'Hapus',
+            body: '{{ $message }}'
+        });
+        @endif
 
         $('#tableWaktu').dataTable({
             responsive: true,
@@ -220,6 +259,18 @@
                 {'width': '20%','class': 'text-center'},
             ]
         });
+        $(document).on("click", ".open-hapusAktivitas", function (e) {
+            e.preventDefault();
+            let fid = $(this).data('id');
+            let ftanaman = $(this).data('tanaman');
+            let fhari = $(this).data('hari');
+            let base_url = "{{route('admin.deleteaktivitas',":id")}}";
+            let replaceURL = base_url.replace(":id",fhari);
+            $('#hapusForm').attr('action', replaceURL);
+            $('#idHapusTanaman').val(ftanaman);
+            $('#idHapusAktivitas').val(fid);
+        });
+
         $(document).on("click", ".open-editAktivitas", function (e) {
             e.preventDefault();
             let fid = $(this).data('id');
@@ -249,6 +300,8 @@
             let fid = $(this).data('id');
             let base_url = "{{route('admin.aktivitastanaman')}}";
             $(function () {
+
+
                 $('#tbDetail').DataTable({
                     responsive: true,
                     processing: true,

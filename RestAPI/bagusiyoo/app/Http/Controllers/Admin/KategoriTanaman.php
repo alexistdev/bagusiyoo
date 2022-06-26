@@ -158,6 +158,7 @@ class KategoriTanaman extends Controller
     public function detail($id)
     {
         Tanaman::findOrFail($id);
+//        return $aktivitas = Aktivitas::all();
        $waktuTanam = Waktutanam::with('aktif')->where('tanaman_id',$id)->get();
 
         return view('admin.detailtanaman', array(
@@ -173,13 +174,14 @@ class KategoriTanaman extends Controller
     public function data_aktivitas(Request $request)
     {
         if ($request->ajax()) {
+//            $aktivitas = Aktivitas::all();
             $aktivitas = Aktivitas::with('waktutanam')->where('waktutanam_id',$request->idTanam)->get();
             return DataTables::of($aktivitas)
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
                     $btn = '<button data-id="' . $row->id . '" class="btn btn-sm btn-primary m-1 open-editAktivitas"  data-tanaman="'.$row->waktutanam->tanaman_id.'"data-hari="'.$row->waktutanam_id.'" data-nama="'.$row->name.'"data-toggle="modal" data-target="#modalEditAktivitas" ><i class="fas fa-edit"></i> Edit</button>';
-//                    $btn = $btn . '<button onclick="removeFunction(' . $row->id . ')"  class="btn btn-sm btn-danger m-1" ><i class="fas fa-minus-circle"></i></button>';
+                    $btn = $btn . '<button  data-id="' . $row->id . '" data-tanaman="'.$row->waktutanam->tanaman_id.'" data-hari="'.$row->waktutanam_id.'" class="btn btn-sm btn-danger m-1 open-hapusAktivitas" data-toggle="modal" data-target="#modalHapusAktivitas" ><i class="fas fa-minus-circle"></i> Hapus</button>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
@@ -233,6 +235,31 @@ class KategoriTanaman extends Controller
             ]);
             DB::commit();
             return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['success' => 'Data aktivitas berhasil diperbaharui']);
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function delete_aktivitas(Request $request, $hari)
+    {
+        Waktutanam::findOrFail($hari);
+        $rules = [
+            'idtanaman' => 'required|numeric',
+            'idaktivitas' => 'required|numeric',
+        ];
+        $message = [
+            'idtanaman.required' => "id tidak ditemukan silahkan refresh halaman!",
+            'idtanaman.numeric' => "id tidak ditemukan silahkan refresh halaman!",
+            'idaktivitas.required' => "id tidak ditemukan silahkan refresh halaman!",
+            'idaktivitas.numeric' => "id tidak ditemukan silahkan refresh halaman!",
+        ];
+        $request->validateWithBag('deleteAktivitas', $rules,$message);
+        DB::beginTransaction();
+        try{
+            Aktivitas::where('id',$request->idaktivitas)->delete();
+            DB::commit();
+            return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['hapus' => 'Data aktivitas berhasil dihapus']);
         } catch (\Exception $e) {
             DB::rollback();
             return redirect(route('admin.detailtanaman',$request->idtanaman))->with(['error' => $e->getMessage()]);
