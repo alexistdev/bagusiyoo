@@ -123,4 +123,31 @@ class DiaryController extends Controller
             }
         }
     }
+
+    public function delete_diary(Request $request)
+    {
+        $validation = Validator::make($request->all(),[
+            'idBook' => 'required|numeric',
+        ]);
+        if($validation->fails()){
+            return response()->json(array(
+                'status' => false,
+                'message' => 'Data, tidak lengkap',
+            ),404);
+        } else {
+            $book = Book::find($request->idBook);
+            if($book == null){
+                return response()->json(array(
+                    'status' => false,
+                    'message' => 'Data diary tidak ditemukan!',
+                ),404);
+            } else {
+                $book->delete();
+                return response()->json(array(
+                    'status' => true,
+                    'message' => 'Data diary berhasil dihapus',
+                ),200);
+            }
+        }
+    }
 }

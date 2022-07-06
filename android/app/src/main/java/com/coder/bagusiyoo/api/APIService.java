@@ -11,6 +11,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -32,9 +33,8 @@ public interface APIService {
                                 @Field("judul") String judul,
                                 @Field("id_user") String id_user);
 
-    @FormUrlEncoded
-    @POST("api/diary")
-    Call<DiaryModel> hapusData(@Field("idBook") String id_Book);
+    @DELETE("api/diary")
+    Call<DiaryModel> hapusData(@Query("idBook") String id_Book);
 
 
 
