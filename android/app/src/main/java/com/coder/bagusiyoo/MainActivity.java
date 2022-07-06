@@ -22,12 +22,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DiaryAdapter.ClickListener{
     private RecyclerView gridDiary;
     private DiaryAdapter diaryAdapter;
     private List<DiaryModel> daftarDiary;
     private ProgressDialog progressDialog;
     private ImageView mTambah;
+//    private DiaryAdapter.ClickListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
             getSupportActionBar().setTitle("Diary Tanaman");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
+//        listener = new DiaryAdapter.ClickListener() {
+//            @Override
+//            public void dataItemDiary(String idDiary, String msg) {
+//                pesan(idDiary);
+//            }
+//        };
         initData();
         setupRecyclerView();
         setData();
@@ -79,6 +86,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
     private void initData(){
         mTambah = findViewById(R.id.btnTambah);
         progressDialog = ProgressDialog.show(this, "", "Loading.....", true, false);
@@ -98,8 +106,14 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        diaryAdapter = new DiaryAdapter(new ArrayList<>());
+        diaryAdapter = new DiaryAdapter(new ArrayList<>(),this::dataItemDiary);
         gridDiary.setLayoutManager(linearLayoutManager);
         gridDiary.setAdapter(diaryAdapter);
+    }
+
+    @Override
+    public void dataItemDiary(String idDiary, String msg) {
+//        pesan(idDiary);
+        //todo fungsi untuk menghapus pesan
     }
 }

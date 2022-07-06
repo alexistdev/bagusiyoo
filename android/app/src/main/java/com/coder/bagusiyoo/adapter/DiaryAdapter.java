@@ -21,9 +21,11 @@ import java.util.List;
 
 public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder>{
     List<DiaryModel> mDiaryList;
+    public DiaryAdapter.ClickListener clickListener;
 
-    public DiaryAdapter(List<DiaryModel> daftarDiary) {
-        this.mDiaryList = daftarDiary;
+    public DiaryAdapter(List<DiaryModel> mDiaryList, ClickListener clickListener) {
+        this.mDiaryList = mDiaryList;
+        this.clickListener = clickListener;
     }
 
     @NonNull
@@ -36,11 +38,14 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder (@NonNull MyViewHolder holder,final int position){
+    public void onBindViewHolder (@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") final int position){
         holder.mHarike.setText("Hari ke "+mDiaryList.get(position).getHarike());
         holder.mMulai.setText("Mulai: "+mDiaryList.get(position).getMulaiTanam());
         holder.mTanaman.setText(mDiaryList.get(position).getNamaTanaman());
         holder.mPanen.setText("Selesai: "+mDiaryList.get(position).getPanen());
+        holder.mHapus.setOnClickListener(v ->
+                clickListener.dataItemDiary(mDiaryList.get(position).getIdDiary(),"Data berhasil dihapus!")
+        );
         holder.itemView.setOnClickListener(view -> {
             Intent mIntent = new Intent(view.getContext(), Detailtanaman.class);
             mIntent.putExtra("idDiary",mDiaryList.get(position).getIdDiary());
@@ -50,7 +55,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         @SuppressLint("StaticFieldLeak")
-        private final TextView mHarike,mMulai,mTanaman,mPanen;
+        private final TextView mHarike,mMulai,mTanaman,mPanen,mHapus;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -58,6 +63,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
             mMulai = itemView.findViewById(R.id.txtMulai);
             mTanaman = itemView.findViewById(R.id.txtTanaman);
             mPanen = itemView.findViewById(R.id.txtPanen);
+            mHapus = itemView.findViewById(R.id.txt_hapus);
         }
     }
 
@@ -69,5 +75,9 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
     public void replaceData(List<DiaryModel> daftarDiary) {
         this.mDiaryList = daftarDiary;
         notifyDataSetChanged();
+    }
+
+    public interface ClickListener{
+        void dataItemDiary(String idDiary, String msg);
     }
 }
