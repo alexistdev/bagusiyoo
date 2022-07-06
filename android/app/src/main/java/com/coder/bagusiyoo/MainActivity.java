@@ -40,12 +40,7 @@ public class MainActivity extends AppCompatActivity implements DiaryAdapter.Clic
             getSupportActionBar().setTitle("Diary Tanaman");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
         }
-//        listener = new DiaryAdapter.ClickListener() {
-//            @Override
-//            public void dataItemDiary(String idDiary, String msg) {
-//                pesan(idDiary);
-//            }
-//        };
+
         initData();
         setupRecyclerView();
         setData();
@@ -113,7 +108,39 @@ public class MainActivity extends AppCompatActivity implements DiaryAdapter.Clic
 
     @Override
     public void dataItemDiary(String idDiary, String msg) {
-//        pesan(idDiary);
-        //todo fungsi untuk menghapus pesan
+        //menghapus data
+        hapusData(idDiary,msg);
+    }
+
+    private void hapusData(String idDiary, String msg){
+        try{
+            Call<DiaryModel> call = APIService.Factory.create(getApplicationContext()).hapusData(idDiary);
+            call.enqueue(new Callback<DiaryModel>() {
+                @EverythingIsNonNull
+                @Override
+                public void onResponse(Call<DiaryModel> call, Response<DiaryModel> response) {
+                    if(response.isSuccessful()) {
+                        if (response.body() != null) {
+                            progressDialog.dismiss();
+                            pesan(msg);
+                            setupRecyclerView();
+                            setData();
+                        }
+                    }
+                }
+                @EverythingIsNonNull
+                @Override
+                public void onFailure(Call<DiaryModel> call, Throwable t) {
+                    progressDialog.dismiss();
+                    if(t instanceof NoConnectivityException) {
+                        pesan("Internet Offline!");
+                    }
+                }
+            });
+        } catch (Exception e) {
+            progressDialog.dismiss();
+            e.printStackTrace();
+            pesan(e.getMessage());
+        }
     }
 }

@@ -32,6 +32,11 @@ public interface APIService {
                                 @Field("judul") String judul,
                                 @Field("id_user") String id_user);
 
+    @FormUrlEncoded
+    @POST("api/diary")
+    Call<DiaryModel> hapusData(@Field("idBook") String id_Book);
+
+
 
     class Factory{
         public static APIService create(Context mContext){
