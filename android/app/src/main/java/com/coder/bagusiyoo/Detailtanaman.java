@@ -4,22 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import com.coder.bagusiyoo.adapter.AktivitasAdapter;
-import com.coder.bagusiyoo.adapter.DiaryAdapter;
 import com.coder.bagusiyoo.api.APIService;
 import com.coder.bagusiyoo.api.NoConnectivityException;
 import com.coder.bagusiyoo.model.AktivitasModel;
 import com.coder.bagusiyoo.response.GetAktivitas;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -42,14 +37,21 @@ public class Detailtanaman extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        String idBook = "0";
         initData();
         setupRecyclerView();
-        setData();
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras != null) {
+                idBook= extras.getString("idDiary");
+                setData(idBook);
+            }
+        }
     }
 
-    private void setData(){
+    private void setData(String idBook){
         try{
-            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext()).dapatAktivitas("7");
+            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext()).dapatAktivitas("9",idBook);
             call.enqueue(new Callback<GetAktivitas>() {
                 @EverythingIsNonNull
                 @Override
@@ -90,7 +92,6 @@ public class Detailtanaman extends AppCompatActivity {
                 return new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             }
         };
-
         aktivitasAdapter = new AktivitasAdapter(new ArrayList<>());
         gridAktivitas.setLayoutManager(linearLayoutManager);
         gridAktivitas.setAdapter(aktivitasAdapter);

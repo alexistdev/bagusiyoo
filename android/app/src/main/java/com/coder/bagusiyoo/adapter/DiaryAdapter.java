@@ -43,7 +43,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
         holder.mPanen.setText("Selesai: "+mDiaryList.get(position).getPanen());
         holder.itemView.setOnClickListener(view -> {
             Intent mIntent = new Intent(view.getContext(), Detailtanaman.class);
-//            mIntent.putExtra("idMapel",mMapelList.get(position).getId_pelajaran());
+            mIntent.putExtra("idDiary",mDiaryList.get(position).getIdDiary());
             view.getContext().startActivity(mIntent);
         });
     }

@@ -54,7 +54,7 @@ public class Tambahdata extends AppCompatActivity {
             pesan("Semua kolom harus diisi!");
         } else {
             try{
-                Call<DiaryModel> call = APIService.Factory.create(getApplicationContext()).tambahData("7",judul,"2");
+                Call<DiaryModel> call = APIService.Factory.create(getApplicationContext()).tambahData("9",judul,"2");
                 call.enqueue(new Callback<DiaryModel>() {
                     @EverythingIsNonNull
                     @Override
