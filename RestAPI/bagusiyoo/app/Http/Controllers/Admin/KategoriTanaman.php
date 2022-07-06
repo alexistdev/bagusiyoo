@@ -158,8 +158,7 @@ class KategoriTanaman extends Controller
     public function detail($id)
     {
         Tanaman::findOrFail($id);
-//        return $aktivitas = Aktivitas::all();
-       $waktuTanam = Waktutanam::with('aktif')->where('tanaman_id',$id)->get();
+        $waktuTanam = Waktutanam::with('aktif')->where('tanaman_id',$id)->get();
 
         return view('admin.detailtanaman', array(
             'judul' => "Dashboard Administrator | Diary 1.0",

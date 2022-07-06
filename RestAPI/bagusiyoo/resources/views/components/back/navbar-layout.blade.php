@@ -18,9 +18,13 @@
 
 
             <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                    <i class="fas fa-power-off"></i>
                 </a>
+                </form>
             </li>
         </ul>
     </nav>

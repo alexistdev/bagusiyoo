@@ -125,7 +125,7 @@
                                 <label for="tambahNama"
                                        @if($errors->tambahAktivitas->has('nama'))  class="text-danger labelForm" @endif>NAMA
                                     AKTIVTAS</label>
-                                <input type="text" name="nama" id="tambahNama" maxlength="50"
+                                <input type="text" name="nama" id="tambahNama" maxlength="255"
                                        class="form-control @if($errors->tambahAktivitas->has('nama'))   is-invalid @endif inputForm"
                                        value="{{old('nama')}}"/>
                                 @if($errors->tambahAktivitas->has('nama'))
@@ -165,7 +165,7 @@
                                 <label for="editNama"
                                        @if($errors->editAktivitas->has('nama'))  class="text-danger labelForm" @endif>NAMA
                                     AKTIVTAS</label>
-                                <input type="text" name="nama" id="editNama" maxlength="50"
+                                <input type="text" name="nama" id="editNama" maxlength="255"
                                        class="form-control @if($errors->editAktivitas->has('nama'))   is-invalid @endif inputForm"
                                        value="{{old('nama')}}" required/>
                                 @if($errors->editAktivitas->has('nama'))
@@ -189,7 +189,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Edit Data Aktivitas </h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Hapus Aktivitas </h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
