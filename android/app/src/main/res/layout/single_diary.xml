@@ -9,15 +9,15 @@
     app:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:background="@drawable/border_card"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="125dp"
+        android:background="@drawable/border_card"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="100dp"
-            android:layout_height="75dp"
-            android:layout_margin="5dp"
+            android:layout_height="100dp"
+            android:layout_margin="15dp"
             android:contentDescription="gambar logo"
             android:src="@drawable/wateringcan" />
 
@@ -25,11 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:weightSum="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/txtHarike"
@@ -42,53 +43,60 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/txt_hapus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:text="X"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.883"
-                    app:layout_constraintStart_toEndOf="@+id/txtHarike"
-                    app:layout_constraintTop_toTopOf="parent" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="Budidaya Buah Melon"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:text="Budidaya Buah Melon"/>
+                android:textStyle="bold" />
+
             <TextView
-                android:layout_weight="1"
                 android:id="@+id/txtTanaman"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:textSize="16sp"
-                android:text="Tanaman pertama"/>
+                android:layout_height="25dp"
+                android:layout_weight="1"
+                android:text="Tanaman pertama"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/txt_hapus"
+                android:layout_width="70dp"
+                android:layout_height="22dp"
+                android:layout_gravity="left"
+                android:layout_marginStart="0dp"
+                android:layout_marginLeft="40dp"
+                android:background="@drawable/hapus"
+                android:text="Hapus"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:layout_weight="1"
                     android:id="@+id/txtMulai"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:text="Mulai : 01-01-2022"/>
-                <TextView
                     android:layout_weight="1"
+                    android:text="Mulai : 01-01-2022"
+                    android:textSize="13sp" />
+
+                <TextView
                     android:id="@+id/txtPanen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:text="Selesai : 01-03-2022"/>
+                    android:layout_weight="1"
+                    android:text="Selesai : 01-03-2022"
+                    android:textSize="13sp" />
+
             </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
+
 </androidx.cardview.widget.CardView>
