@@ -101,14 +101,13 @@ public class MainActivity extends AppCompatActivity implements DiaryAdapter.Clic
             }
         };
 
-        diaryAdapter = new DiaryAdapter(new ArrayList<>(),this::dataItemDiary);
+        diaryAdapter = new DiaryAdapter(new ArrayList<>(), this);
         gridDiary.setLayoutManager(linearLayoutManager);
         gridDiary.setAdapter(diaryAdapter);
     }
 
     @Override
     public void dataItemDiary(String idDiary, String msg) {
-        //menghapus data
         hapusData(idDiary,msg);
     }
 

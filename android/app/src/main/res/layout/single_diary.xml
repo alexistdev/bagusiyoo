@@ -64,12 +64,10 @@
                 android:id="@+id/txt_hapus"
                 android:layout_width="70dp"
                 android:layout_height="22dp"
-                android:layout_gravity="left"
+                android:layout_gravity="start"
                 android:layout_marginStart="0dp"
-                android:layout_marginLeft="40dp"
                 android:background="@drawable/hapus"
                 android:text="Hapus"
-                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent" />
 
