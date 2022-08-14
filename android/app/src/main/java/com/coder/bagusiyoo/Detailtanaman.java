@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.coder.bagusiyoo.adapter.AktivitasAdapter;
 import com.coder.bagusiyoo.api.APIService;
@@ -25,6 +26,7 @@ public class Detailtanaman extends AppCompatActivity {
     private AktivitasAdapter aktivitasAdapter;
     private List<AktivitasModel> daftarAktivitas;
     private ProgressDialog progressDialog;
+    private TextView mHarike;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,20 +40,22 @@ public class Detailtanaman extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         String idBook = "0";
+        String idTanaman = "0";
         initData();
         setupRecyclerView();
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras != null) {
                 idBook= extras.getString("idDiary");
-                setData(idBook);
+                idTanaman= extras.getString("idTanaman");
+                setData(idBook,idTanaman);
             }
         }
     }
 
-    private void setData(String idBook){
+    private void setData(String idBook,String idTanaman){
         try{
-            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext()).dapatAktivitas("9",idBook);
+            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext()).dapatAktivitas(idTanaman,idBook);
             call.enqueue(new Callback<GetAktivitas>() {
                 @EverythingIsNonNull
                 @Override
@@ -59,6 +63,7 @@ public class Detailtanaman extends AppCompatActivity {
                     progressDialog.dismiss();
                     if(response.isSuccessful()){
                         if(response.body() != null){
+                            mHarike.setText("Hari ke-"+response.body().getHarike());
                             daftarAktivitas = response.body().getListAktivitas();
                             aktivitasAdapter.replaceData(daftarAktivitas);
                         }
@@ -100,5 +105,6 @@ public class Detailtanaman extends AppCompatActivity {
     private void initData(){
         progressDialog = ProgressDialog.show(this, "", "Loading.....", true, false);
         gridAktivitas = findViewById(R.id.rcAktivitas);
+        mHarike = findViewById(R.id.harike);
     }
 }

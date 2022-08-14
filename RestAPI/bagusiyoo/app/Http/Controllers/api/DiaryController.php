@@ -25,12 +25,27 @@ class DiaryController extends Controller
                 'message' => 'Data, tidak lengkap',
             ),404);
         } else {
-            $data = Book::where('user_id',$request->idUser)->get();
+            $data = Book::with('tanaman')->where('user_id',$request->idUser)->get();
             if(!$data->isEmpty()){
+                $now = time();
+                $xData = collect();
+                foreach($data as $row){
+                    $tanggalDibuat = strtotime($row->created_at);
+                    $datediff = $now - $tanggalDibuat;
+                    $harikeDiary = (int) round($datediff / (60 * 60 * 24));
+                    $datax['id'] = $row->id;
+                    $datax['tanaman_id']=$row->tanaman_id;
+                    $datax['name']=$row->name;
+                    $datax['nama_tanaman']=$row->tanaman->name;
+                    $datax['harike']=$harikeDiary;
+                    $datax['created_at']=$row->created_at;
+                    $datax['panen']=$row->panen;
+                    $xData->push($datax);
+                }
                 return response()->json(array(
                     'status' => true,
                     'message' => 'Data diary berhasil didapatkan',
-                    'result' => $data,
+                    'result' => $xData,
                 ),200);
             }else{
                 return response()->json(array(
@@ -64,24 +79,33 @@ class DiaryController extends Controller
                     'message' => 'Data tanaman tidak ditemukan!',
                 ),404);
             } else {
-                $book = Book::find($request->idBook);
+                $book = Book::where('id',$request->idBook)->first();
+
                 if($book == null){
                     return response()->json(array(
                         'status' => false,
-                        'message' => 'Data Diary tidak ditemukan!',
+                        'message' => 'Data Diary tidak ditemukan2!',
                     ),404);
                 } else {
                     //Mendapatkan selisih hari dari saat diary dibuat dengan waktu saat ini, untuk mendapatkan data aktivitas hari ke
                     $now = time();
-                    $tanggalDibuat = strtotime("06-07-2022");
+                    $tanggalDibuat = strtotime($book->created_at);
                     $datediff = $now - $tanggalDibuat;
                     $harikeDiary = (int) round($datediff / (60 * 60 * 24));
-                    $waktuTanam = Waktutanam::where('tanaman_id',$request->idTanaman)->where('hari_ke',$harikeDiary+1)->first();
-                    $aktivitas = Aktivitas::where('waktutanam_id',$waktuTanam->id)->get();
+                    $waktuTanam = Waktutanam::where('tanaman_id',$request->idTanaman)->where('hari_ke',$harikeDiary)->first();
+                    $aktivitas = Aktivitas::with('waktutanam')->where('waktutanam_id',$waktuTanam->id)->get();
+                    $data=collect();
+                    foreach($aktivitas as $row){
+                        $datax['id'] =$row->id;
+                        $datax['name'] =$row->name;
+                        $datax['harike'] =$row->waktutanam->hari_ke;
+                        $data->push($datax);
+                    }
                     return response()->json(array(
                         'status' => true,
                         'message' => 'Data aktivitas berhasil didapatkan',
-                        'result' => $aktivitas,
+                        'harike' => $waktuTanam->hari_ke,
+                        'result' => $data,
                     ),200);
                 }
             }

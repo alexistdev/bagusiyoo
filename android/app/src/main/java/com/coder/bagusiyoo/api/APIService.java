@@ -6,6 +6,8 @@ import com.coder.bagusiyoo.config.Constants;
 import com.coder.bagusiyoo.model.DiaryModel;
 import com.coder.bagusiyoo.response.GetAktivitas;
 import com.coder.bagusiyoo.response.GetDiary;
+import com.coder.bagusiyoo.response.GetTanaman;
+
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -19,6 +21,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public interface APIService {
+
+    @GET("api/tanaman")
+    Call<GetTanaman> spinnerTanaman();
+
     @GET("api/diary")
     Call<GetDiary> dapatDiary(@Query("idUser") String id_user);
 

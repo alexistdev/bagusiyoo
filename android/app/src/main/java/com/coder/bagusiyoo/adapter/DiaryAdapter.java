@@ -43,19 +43,21 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
         holder.mMulai.setText("Mulai: "+mDiaryList.get(position).getMulaiTanam());
         holder.mTanaman.setText(mDiaryList.get(position).getNamaTanaman());
         holder.mPanen.setText("Selesai: "+mDiaryList.get(position).getPanen());
+        holder.mJudultebal.setText(mDiaryList.get(position).getJudul());
         holder.mHapus.setOnClickListener(v ->
                 clickListener.dataItemDiary(mDiaryList.get(position).getIdDiary(),"Data berhasil dihapus!")
         );
         holder.itemView.setOnClickListener(view -> {
             Intent mIntent = new Intent(view.getContext(), Detailtanaman.class);
             mIntent.putExtra("idDiary",mDiaryList.get(position).getIdDiary());
+            mIntent.putExtra("idTanaman",mDiaryList.get(position).getIdTanaman());
             view.getContext().startActivity(mIntent);
         });
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         @SuppressLint("StaticFieldLeak")
-        private final TextView mHarike,mMulai,mTanaman,mPanen,mHapus;
+        private final TextView mHarike,mMulai,mTanaman,mPanen,mHapus,mJudultebal;
 
         MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -64,6 +66,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<DiaryAdapter.MyViewHolder
             mTanaman = itemView.findViewById(R.id.txtTanaman);
             mPanen = itemView.findViewById(R.id.txtPanen);
             mHapus = itemView.findViewById(R.id.txt_hapus);
+            mJudultebal = itemView.findViewById(R.id.judultebal);
         }
     }
 

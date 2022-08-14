@@ -15,4 +15,8 @@ class Waktutanam extends Model
     public function aktif(){
         return $this->hasMany(Aktivitas::class);
     }
+    public function rate(){
+        return $this->review()->avg('rate'); // chain your query here
+    }
+
 }

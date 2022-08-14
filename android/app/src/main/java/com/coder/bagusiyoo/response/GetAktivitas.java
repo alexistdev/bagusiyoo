@@ -13,12 +13,16 @@ public class GetAktivitas {
     @SerializedName("message")
     final private String message;
 
+    @SerializedName("harike")
+    final private String harike;
+
     @SerializedName("status")
     final private String status;
 
-    public GetAktivitas(List<AktivitasModel> listAktivitas, String message, String status) {
+    public GetAktivitas(List<AktivitasModel> listAktivitas, String message, String harike, String status) {
         this.listAktivitas = listAktivitas;
         this.message = message;
+        this.harike = harike;
         this.status = status;
     }
 
@@ -28,6 +32,10 @@ public class GetAktivitas {
 
     public String getMessage() {
         return message;
+    }
+
+    public String getHarike() {
+        return harike;
     }
 
     public String getStatus() {

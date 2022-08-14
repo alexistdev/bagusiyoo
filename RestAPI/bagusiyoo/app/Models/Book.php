@@ -27,4 +27,9 @@ class Book extends Model
             get: fn ($value) => date('d-m-Y', strtotime($value))
         );
     }
+
+    public function tanaman(){
+        return $this->belongsTo(Tanaman::class);
+    }
+
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\api\{DiaryController as Diary};
+use App\Http\Controllers\api\{DiaryController as Diary,TanamanController as Tanaman};
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +22,6 @@ Route::get('/diary', [Diary::class, 'get_diary']);
 Route::get('/aktivitas', [Diary::class, 'get_aktivitas']);
 Route::post('/diary', [Diary::class, 'tambah_diary']);
 Route::delete('/diary', [Diary::class, 'delete_diary']);
+
+Route::get('/tanaman', [Tanaman::class, 'dataSpinner']);
 
