@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity implements DiaryAdapter.Clic
         setupRecyclerView();
         setData();
         mTambah.setOnClickListener(v -> {
-            Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
+            Intent mIntent = new Intent(getApplicationContext(), CekAlgoritma.class);
             startActivity(mIntent);
         });
     }

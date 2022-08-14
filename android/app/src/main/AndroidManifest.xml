@@ -14,9 +14,13 @@
         android:theme="@style/Theme.Bagusiyoo"
         android:usesCleartextTraffic="true">
         <activity
+            android:parentActivityName=".MainActivity"
+            android:name=".CekAlgoritma"
+            android:exported="false" />
+        <activity
             android:name=".Tambahdata"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Detailtanaman"
             android:exported="false"
