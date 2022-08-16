@@ -39,15 +39,19 @@ public class CekAlgoritma extends AppCompatActivity {
                     int suhu = Integer.parseInt(suhux);
                     if ((suhu >= 26 ) && (suhu <= 55)) {
                         mSolusi.setText("Suhu Telampau Tinggi");
+                        Intent mIntent = new Intent(getApplicationContext(), kelembapan.class);
+                        startActivity(mIntent);
 
                     }
                     else if ((suhu >=21 ) && (suhu <= 26)) {
                         mSolusi.setText(" suhu cocok untuk budidaya");
-                        Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
+                        Intent mIntent = new Intent(getApplicationContext(), kelembapan.class);
                         startActivity(mIntent);
                     }
                     else if ((suhu >=10 ) && (suhu <= 20)) {
                         mSolusi.setText("Terlampau rendah");
+                        Intent mIntent = new Intent(getApplicationContext(), kelembapan.class);
+                        startActivity(mIntent);
 
                     }
                     else
