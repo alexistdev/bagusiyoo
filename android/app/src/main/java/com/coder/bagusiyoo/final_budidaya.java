@@ -116,9 +116,9 @@ public class final_budidaya extends AppCompatActivity {
 
     }
     private void initData(){
-        mbudidaya = findViewById(R.id.edSuhu);
+        mbudidaya = findViewById(R.id.edbudidaya);
         mSolusiiii = findViewById(R.id.txt_solusii);
-        mCuk = findViewById(R.id.btn_cikk);
+        mCuk = findViewById(R.id.btn_cukk);
 
     }
 

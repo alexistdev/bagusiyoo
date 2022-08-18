@@ -24,7 +24,7 @@ public class kelembapan extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.yo);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cek Waktu Tanam");
+            getSupportActionBar().setTitle("Cek Kelembaban");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -66,7 +66,7 @@ public class kelembapan extends AppCompatActivity {
 
     }
     private void initData(){
-        mlembab = findViewById(R.id.edSuhu);
+        mlembab = findViewById(R.id.edlembab);
         mSolusii = findViewById(R.id.txt_solusii);
         mCok = findViewById(R.id.btn_cekk);
 

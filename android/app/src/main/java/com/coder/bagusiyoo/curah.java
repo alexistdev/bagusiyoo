@@ -24,7 +24,7 @@ public class curah extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.ya);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cek Waktu Tanam");
+            getSupportActionBar().setTitle("Cek Curah Hujan");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
