@@ -24,7 +24,7 @@ public class CekAlgoritma extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbtoolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cek Waktu Tanam");
+            getSupportActionBar().setTitle("Cek Suhu");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }

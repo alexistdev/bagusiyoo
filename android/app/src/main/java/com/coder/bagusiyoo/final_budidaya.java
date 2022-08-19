@@ -24,7 +24,7 @@ public class final_budidaya extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.yaa);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cek Waktu Tanam");
+            getSupportActionBar().setTitle("Pengujian Algoritma Genetika");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
