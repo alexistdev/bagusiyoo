@@ -37,8 +37,8 @@ public class curah extends AppCompatActivity {
                     pesan("Semua kolom harus diisi!");
                 } else {
                     int curah = Integer.parseInt(curahx);
-                    if ((curah >= 208.34) && (curah < 500)) {
-                        mSolusiii.setText("Curah Ujan Terlampau Tinggi");
+                    if ((curah >= 208.34) && (curah < 1000)) {
+                        mSolusiii.setText("Hasil : Curah Ujan Terlampau Tinggi");
                         Intent mIntent = new Intent(getApplicationContext(), final_budidaya.class);
                         startActivity(mIntent);
 
@@ -48,11 +48,10 @@ public class curah extends AppCompatActivity {
                         Intent mIntent = new Intent(getApplicationContext(), final_budidaya.class);
                         startActivity(mIntent);
                     }
-                    else if ((curah >= 30) && (curah < 130)) {
+                    else if ((curah >= 1) && (curah < 130)) {
                         mSolusiii.setText("Curah Ujan Terlampau Rendah");
                         Intent mIntent = new Intent(getApplicationContext(), final_budidaya.class);
                         startActivity(mIntent);
-
                     }
                     else
                     {

@@ -14,12 +14,15 @@
         android:theme="@style/Theme.Bagusiyoo"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".kembali"
+            android:exported="false" />
+        <activity
             android:name=".final_budidaya"
             android:exported="false" />
         <activity
             android:name=".curah"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".kelembapan"
             android:exported="false" />

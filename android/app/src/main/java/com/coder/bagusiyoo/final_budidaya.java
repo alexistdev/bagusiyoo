@@ -14,8 +14,8 @@ import android.widget.Toast;
 public class final_budidaya extends AppCompatActivity {
 
     private EditText mbudidaya;
-    private TextView mSolusiiii;
-    private Button mCuk;
+    private TextView msolusiiii;
+    private Button mcukk;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class final_budidaya extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         initData();
-        mCuk.setOnClickListener(new View.OnClickListener() {
+        mcukk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String budidayax = mbudidaya.getText().toString();
@@ -37,76 +37,80 @@ public class final_budidaya extends AppCompatActivity {
                     pesan("Semua kolom harus diisi!");
                 } else {
                     int Budidaya = Integer.parseInt(budidayax);
-                     if ((Budidaya==1)) {
-                        mbudidaya.setText(" Budidaya berhasil maka perkiraan panen maret");
+                     if ((Budidaya == 1)) {
+                         msolusiiii.setText(" Budidaya berhasil maka perkiraan panen maret");
                         Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                         startActivity(mIntent);
                     }
-                    else if ((Budidaya==2)) {
-                        mbudidaya.setText("Budidaya tidak berhasil dikarenakan bulan maret dan april cuaca tidak mendukung");
-
+                    else if ((Budidaya == 2)) {
+                         msolusiiii.setText("Budidaya tidak berhasil dikarenakan bulan maret dan april cuaca tidak mendukung");
+                         Intent mIntent = new Intent(getApplicationContext(), kembali.class);
+                         startActivity(mIntent);
                     }
                     else if ((Budidaya==3)) {
-                        mbudidaya.setText("Budidaya tidak berhasil dikarenakan bulan april dan mei cuaca tidak mendukung");
+                         msolusiiii.setText("Budidaya tidak berhasil dikarenakan bulan april dan mei cuaca tidak mendukung");
+                         Intent mIntent = new Intent(getApplicationContext(), kembali.class);
+                         startActivity(mIntent);
 
-                    }
+
+                     }
                     else if ((Budidaya==4)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen juni");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen juni");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==5)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen juli");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen juli");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==6)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen agustus");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen agustus");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==7)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen september");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen september");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==8)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen oktober");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen oktober");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==9)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen November");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen November");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==10)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen Desember");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen Desember");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==11)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen Januari");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen Januari");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else if ((Budidaya==12)) {
-                        mbudidaya.setText("Budidaya berhasil maka perkiraan panen Febuari");
+                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen Febuari");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
                     }
                     else
                     {
-                        mbudidaya.setText("format salah!");
+                        msolusiiii.setText("format salah!");
 
                     }
 
@@ -117,8 +121,8 @@ public class final_budidaya extends AppCompatActivity {
     }
     private void initData(){
         mbudidaya = findViewById(R.id.edbudidaya);
-        mSolusiiii = findViewById(R.id.txt_solusii);
-        mCuk = findViewById(R.id.btn_cukk);
+        msolusiiii = findViewById(R.id.txt_budidaya);
+        mcukk = findViewById(R.id.btn_cukk);
 
     }
 

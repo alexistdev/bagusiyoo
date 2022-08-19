@@ -3,6 +3,7 @@ package com.coder.bagusiyoo;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +38,7 @@ public class kelembapan extends AppCompatActivity {
                     pesan("Semua kolom harus diisi!");
                 } else {
                     int kelembapan = Integer.parseInt(lembabx);
-                    if ((kelembapan >= 88 ) && (kelembapan < 90)) {
+                    if ((kelembapan >= 88 ) && (kelembapan < 900)) {
                         mSolusii.setText("Kelembapan Terlampau Tinggi");
                         Intent mIntent = new Intent(getApplicationContext(), curah.class);
                         startActivity(mIntent);
@@ -48,7 +49,7 @@ public class kelembapan extends AppCompatActivity {
                         Intent mIntent = new Intent(getApplicationContext(), curah.class);
                         startActivity(mIntent);
                     }
-                    else if ((kelembapan >= 30) && (kelembapan < 60)) {
+                    else if ((kelembapan >= 1) && (kelembapan < 74)) {
                         mSolusii.setText("Kelembapan Terlampau Rendah");
                         Intent mIntent = new Intent(getApplicationContext(), curah.class);
                         startActivity(mIntent);

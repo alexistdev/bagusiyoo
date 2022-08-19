@@ -15,45 +15,88 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:titleTextColor="@color/white" />
+        app:titleTextColor="@color/white" /><![CDATA[
+
+    />
+
+
+
+    ]]>
 
     <EditText
         android:id="@+id/edbudidaya"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
         android:layout_marginStart="12sp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="12sp"
+        android:background="@drawable/border_card"
         android:hint="MULAI BUDIDAYA PADA BULAN "
         android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yaa"
+        app:layout_constraintVertical_bias="0.013" />
+
+    <TextView
+        android:id="@+id/txt_budidaya"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginStart="12sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="12sp"
+        android:background="@drawable/border_card"
+        android:gravity="center"
+        android:text="HASIL"
+        android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/yaa" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <TextView
-        android:id="@+id/txt_solusiiii"
-        android:layout_width="match_parent"
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12sp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="12sp"
-        android:text="HASIL"
+        android:layout_marginTop="40dp"
+        android:text="Hasil"
+        android:textColor="@color/hijau"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edbudidaya" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MULAI BUDIDAYA PADA BULAN"
+        android:textColor="@color/hijau"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/edbudidaya"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/yaa"
+        app:layout_constraintVertical_bias="0.872" />
 
     <Button
         android:id="@+id/btn_cukk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Cek"
+        android:background="@drawable/bb"
         android:backgroundTint="@color/hijau"
+        android:text="Cek"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_solusiiii" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_budidaya" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
