@@ -43,19 +43,19 @@ public class final_budidaya extends AppCompatActivity {
                         startActivity(mIntent);
                     }
                     else if ((Budidaya == 2)) {
-                         msolusiiii.setText("Budidaya tidak berhasil dikarenakan bulan maret dan april cuaca tidak mendukung");
+                         msolusiiii.setText("Disarankan Tidak Memulai Budidaya");
                          Intent mIntent = new Intent(getApplicationContext(), kembali.class);
                          startActivity(mIntent);
                     }
                     else if ((Budidaya==3)) {
-                         msolusiiii.setText("Budidaya tidak berhasil dikarenakan bulan april dan mei cuaca tidak mendukung");
+                         msolusiiii.setText("Disarankan Tidak Memulai Budidaya");
                          Intent mIntent = new Intent(getApplicationContext(), kembali.class);
                          startActivity(mIntent);
 
 
                      }
                     else if ((Budidaya==4)) {
-                         msolusiiii.setText("Budidaya berhasil maka perkiraan panen juni");
+                         msolusiiii.setText("Disarankan Tidak Memulai Budidaya");
                          Intent mIntent = new Intent(getApplicationContext(), Tambahdata.class);
                          startActivity(mIntent);
 
