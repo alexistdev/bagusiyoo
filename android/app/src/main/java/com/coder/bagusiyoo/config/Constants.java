@@ -2,6 +2,7 @@ package com.coder.bagusiyoo.config;
 
 public class Constants {
     public static final String URL = "http://bagusiyoo.xyz/";
+    public static final String URL2 = "http://bagusiyoo.xyz/";
 //    public static final String URL = "http://192.168.2.248:8000/";
 
     //Key Session

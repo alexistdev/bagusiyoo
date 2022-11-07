@@ -45,7 +45,8 @@ public interface APIService {
 
 
     class Factory{
-        public static APIService create(Context mContext){
+        public static APIService create(Context mContext,int tipe){
+
             OkHttpClient.Builder builder = new OkHttpClient.Builder();
             builder.readTimeout(20, TimeUnit.SECONDS);
             builder.connectTimeout(20, TimeUnit.SECONDS);
@@ -53,7 +54,7 @@ public interface APIService {
             builder.addInterceptor(new NetworkConnectionInterceptor(mContext));
             OkHttpClient client = builder.build();
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(Constants.URL)
+                    .baseUrl((tipe == 1)?Constants.URL:Constants.URL2)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();

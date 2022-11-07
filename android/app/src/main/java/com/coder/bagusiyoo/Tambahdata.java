@@ -66,7 +66,7 @@ public class Tambahdata extends AppCompatActivity {
 
     private void populateSpinner() {
         try {
-            Call<GetTanaman> call = APIService.Factory.create(getApplicationContext()).spinnerTanaman();
+            Call<GetTanaman> call = APIService.Factory.create(getApplicationContext(),1).spinnerTanaman();
             call.enqueue(new Callback<GetTanaman>() {
                 @EverythingIsNonNull
                 @Override
@@ -101,7 +101,7 @@ public class Tambahdata extends AppCompatActivity {
             pesan("Semua kolom harus diisi!");
         } else {
             try {
-                Call<DiaryModel> call = APIService.Factory.create(getApplicationContext()).tambahData(tanaman, judul, "2");
+                Call<DiaryModel> call = APIService.Factory.create(getApplicationContext(),1).tambahData(tanaman, judul, "2");
                 call.enqueue(new Callback<DiaryModel>() {
                     @EverythingIsNonNull
                     @Override

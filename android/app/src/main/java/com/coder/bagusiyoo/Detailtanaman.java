@@ -55,7 +55,7 @@ public class Detailtanaman extends AppCompatActivity {
 
     private void setData(String idBook,String idTanaman){
         try{
-            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext()).dapatAktivitas(idTanaman,idBook);
+            Call<GetAktivitas> call = APIService.Factory.create(getApplicationContext(),1).dapatAktivitas(idTanaman,idBook);
             call.enqueue(new Callback<GetAktivitas>() {
                 @EverythingIsNonNull
                 @Override
