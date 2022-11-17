@@ -17,39 +17,78 @@
         app:layout_constraintTop_toTopOf="parent"
         app:titleTextColor="@color/white" />
 
+
     <EditText
         android:id="@+id/edcurah"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
         android:layout_marginStart="12sp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="12sp"
+        android:background="@drawable/border_card"
         android:hint="CURAH UJAN"
         android:inputType="number"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.481"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ya" />
+        app:layout_constraintTop_toBottomOf="@+id/ya"
+        app:layout_constraintVertical_bias="0.035" />
 
     <TextView
         android:id="@+id/txt_solusiii"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginStart="12sp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="12sp"
+        android:background="@drawable/border_card"
+        android:gravity="center"
         android:text="HASIL"
+        android:textAlignment="center"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Hasil"
+        android:textColor="@color/hijau"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edcurah" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Masukan Nilai Curah Ujan"
+        android:textAlignment="center"
+        android:textColor="@color/hijau"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/edcurah"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ya"
+        app:layout_constraintVertical_bias="0.872" />
 
     <Button
         android:id="@+id/btn_cikk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Cek"
+        android:background="@drawable/bb"
         android:backgroundTint="@color/hijau"
+        android:text="Cek"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

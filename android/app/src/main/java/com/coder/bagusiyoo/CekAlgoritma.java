@@ -24,7 +24,7 @@ public class CekAlgoritma extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbtoolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setTitle("Cek Waktu Tanam");
+            getSupportActionBar().setTitle("Cek Suhu");
             getSupportActionBar().setDisplayShowTitleEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -37,7 +37,7 @@ public class CekAlgoritma extends AppCompatActivity {
                     pesan("Semua kolom harus diisi!");
                 } else {
                     int suhu = Integer.parseInt(suhux);
-                    if ((suhu >= 26 ) && (suhu <= 55)) {
+                    if ((suhu >= 26 ) && (suhu <= 999)) {
                         mSolusi.setText("Suhu Telampau Tinggi");
                         Intent mIntent = new Intent(getApplicationContext(), kelembapan.class);
                         startActivity(mIntent);
@@ -48,7 +48,7 @@ public class CekAlgoritma extends AppCompatActivity {
                         Intent mIntent = new Intent(getApplicationContext(), kelembapan.class);
                         startActivity(mIntent);
                     }
-                    else if ((suhu >=10 ) && (suhu <= 20)) {
+                    else if ((suhu >=1 ) && (suhu <= 20)) {
                         mSolusi.setText("Terlampau rendah");
                         Intent mIntent = new Intent(getApplicationContext(), kelembapan.class);
                         startActivity(mIntent);

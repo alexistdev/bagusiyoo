@@ -25,10 +25,19 @@
         <entry key="..\:/skripsi/00NEW/bagusiyoo/android/app/src/main/res/layout/activity_tambahdata.xml" value="0.152" />
         <entry key="..\:/skripsi/00NEW/bagusiyoo/android/app/src/main/res/layout/single_aktivitas.xml" value="0.1334853090172239" />
         <entry key="..\:/skripsi/00NEW/bagusiyoo/android/app/src/main/res/layout/single_diary.xml" value="0.264" />
-        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_cek_algoritma.xml" value="0.27447916666666666" />
-        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_curah.xml" value="0.14722222222222223" />
-        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_final_budidaya.xml" value="0.27447916666666666" />
-        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_kelembapan.xml" value="0.27447916666666666" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/drawable/bb.xml" value="0.1125" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/drawable/btn.xml" value="0.2075" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_cek_algoritma.xml" value="0.264" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_curah.xml" value="0.264" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_detailtanaman.xml" value="0.1" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_final_budidaya.xml" value="0.264" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_kelembapan.xml" value="0.1" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_kembali.xml" value="0.2" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_main2.xml" value="0.2" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/activity_tambahdata.xml" value="0.22660098522167488" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/single_aktivitas.xml" value="0.264" />
+        <entry key="..\:/xampp/htdocs/bagusiyoo/android/app/src/main/res/layout/single_diary.xml" value="0.4" />
       </map>
     </option>
   </component>

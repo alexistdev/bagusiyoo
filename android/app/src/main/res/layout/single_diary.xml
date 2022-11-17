@@ -69,6 +69,7 @@
                 android:layout_marginStart="0dp"
                 android:background="@drawable/hapus"
                 android:text="Hapus"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent" />
 
