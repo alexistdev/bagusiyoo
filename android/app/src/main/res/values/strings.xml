@@ -1,9 +1,41 @@
 <resources>
     <string name="app_name">Bagusiyoo</string>
+    <string name="contentDescription">gambar</string>
     <!-- Dashboard -->
     <string name="dash1">tombol tambah</string>
     <string name="dash2">Gambar</string>
     <string name="dash3">Tani Cerdas</string>
     <string name="dash4">Selamat Datang</string>
     <string name="dash5">Penjadwalan Budidaya Tanaman Melon</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--  Sensor  -->
+    <string name="mn_sensor1">Laboratorium</string>
+    <string name="mn_sensor2">IOT IBI DARMAJAYA</string>
+    <string name="mn_sensor3">BANDARLAMPUNG</string>
+    <string name="mn_sensor4">Update Terbaru</string>
+    <string name="mn_sensor5">2021/11/02 22:18:00</string>
+    <string name="mn_sensor6">Pemantauan Tanah</string>
+    <string name="mn_sensor7">Dalam Proses</string>
+    <string name="mn_sensor8">Rata-rata Penggunaan Hari Terakhir</string>
+    <string name="mn_sensor9">SUHU</string>
+    <string name="mn_sensor10">0.7 PH</string>
+    <string name="mn_sensor11">Baik</string>
+    <string name="mn_sensor12">Kelembaban Tanah</string>
+    <string name="mn_sensor13">PH Tanah</string>
+    <string name="mn_sensor14">70 %</string>
+    <string name="mn_sensor15">Zona Pemantauan</string>
+    <string name="mn_sensor16">Hi Sobat The Best</string>
+    <string name="mn_sensor17">Berikut daftar kebun yang kamu miliki</string>
+    <string name="mn_sensor18">Baik</string>
+    <string name="mn_sensor19">Kurang</string>
+    <string name="mn_sensor20">Kelembaban Udara</string>
+    <string name="mn_sensor21">Pemupukan</string>
+    <string name="mn_sensor22">Penyiraman</string>
+    <string name="mn_sensor23">\u0020pH</string>
+    <string name="mn_sensor24">\u0020%</string>
+    <string name="mn_sensor25">&#xb0;\u0020C</string>
+    <string name="mn_sensor26">ON</string>
+    <string name="mn_sensor27">OFF</string>
 </resources>
