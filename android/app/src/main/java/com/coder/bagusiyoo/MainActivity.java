@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements DiaryAdapter.Clic
 
     private void setData(){
         try{
-            Call<GetDiary> call = APIService.Factory.create(getApplicationContext()).dapatDiary("2");
+            Call<GetDiary> call = APIService.Factory.create(getApplicationContext(),1).dapatDiary("2");
             call.enqueue(new Callback<GetDiary>() {
                 @EverythingIsNonNull
                 @Override
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements DiaryAdapter.Clic
 
     private void hapusData(String idDiary, String msg){
         try{
-            Call<DiaryModel> call = APIService.Factory.create(getApplicationContext()).hapusData(idDiary);
+            Call<DiaryModel> call = APIService.Factory.create(getApplicationContext(),1).hapusData(idDiary);
             call.enqueue(new Callback<DiaryModel>() {
                 @EverythingIsNonNull
                 @Override

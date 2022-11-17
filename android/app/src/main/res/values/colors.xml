@@ -10,4 +10,11 @@
     <color name="toolbarIcon">#959090</color>
     <color name="bgGrey">#D6D1D1</color>
     <color name="hijau">#19713F</color>
+
+    <color name="abudark">#4C4A4A</color>
+    <color name="toolbarSelector">#070707</color>
+    <color name="warnaCardSensor">#318C58</color>
+    <color name="warnasplash">#19713F</color>
+    <color name="warnaCard">#FAFAFA</color>
+    <color name="warnaOrange">#F0822B</color>
 </resources>
